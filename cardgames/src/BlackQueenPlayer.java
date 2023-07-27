@@ -1,14 +1,13 @@
-import java.util.ArrayList;
+import java.util.BitSet;
 
 public interface BlackQueenPlayer {
 
-    ArrayList<String> getCards();
+    BitSet getCards();
 
-    void setCards(ArrayList<String> cards);
+    void setCards(BitSet cards);
 
     String getName();
 
-    boolean hasCard(String card);
+    int playCard(BlackQueenGame game);
 
-    String playCard(String history, String round);
 }
