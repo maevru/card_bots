@@ -58,7 +58,7 @@ public class BlackQueenSim {
         }
 
         // Find starting player
-        RandomPlayer startPlayer = null;
+        BlackQueenPlayer startPlayer = null;
         for (BlackQueenPlayer player : players){
             if(player.hasCard("C1")){
                 startPlayer = player;
@@ -69,7 +69,7 @@ public class BlackQueenSim {
         String history = "N";
         String round;
         String playedCard;
-        RandomPlayer nextPlayer = startPlayer;
+        BlackQueenPlayer nextPlayer = startPlayer;
         for(int i = 0; i < 13; i++){
             round = "";
             for(int j = 0; j < 4; j++){
@@ -107,7 +107,7 @@ public class BlackQueenSim {
                 nextPlayerName = splitRound[6];
             }
 
-            for(RandomPlayer player : players){
+            for(BlackQueenPlayer player : players){
                 if(player.getName().equals(nextPlayerName)){
                     nextPlayer = player;
                 }
@@ -115,7 +115,7 @@ public class BlackQueenSim {
 
             // Print round and players and cards
             System.out.println(round);
-            for(RandomPlayer player : players){
+            for(BlackQueenPlayer player : players){
                 System.out.println(player.getName());
                 for(String card : player.getCards()){
                     System.out.print(card + " ");
