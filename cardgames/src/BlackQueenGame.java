@@ -35,6 +35,10 @@ public class BlackQueenGame {
         return rounds.get(rounds.size() - 1).isNewRound();
     }
 
+    public int getTurnInRound(){
+        return rounds.get(rounds.size() - 1).getTurn();
+    }
+
     public void playTurn(BlackQueenPlayer player, int card){
         remaining.clear(card);
         if(!playedHearts && (card >= 39)){

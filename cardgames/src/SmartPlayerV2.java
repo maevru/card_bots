@@ -1,7 +1,10 @@
-import java.util.BitSet;
-import java.util.Random;
+import java.util.*;
 
 public class SmartPlayerV2 implements BlackQueenPlayer{
+
+    public static void main(String[] args) {
+
+    }
 
     private final String name;
     private BitSet cards;
@@ -47,6 +50,33 @@ public class SmartPlayerV2 implements BlackQueenPlayer{
             }
         }
 
+        // SHUFFLE CARDS
+        ArrayList<BitSet> players = new ArrayList<>();
+        players.add(new BitSet(52));
+        players.add(new BitSet(52));
+        players.add(new BitSet(52));
+        Stack<Integer> remaining = new Stack<>();
+        for(int i = game.getRemaining().nextSetBit(0); i != -1; i = game.getRemaining().nextSetBit(i + 1)){
+            if(!cards.get(i)){
+                remaining.add(i);
+            }
+        }
+        Collections.shuffle(remaining);
+
+        int player = 0;
+        while(!remaining.isEmpty()){
+            players.get(player).set(remaining.pop());
+            player = (player + 1) % 3;
+        }
+
+        // RUN GAMES
+
+
         return 0;
+    }
+
+    public ArrayList<BitSet> giveCards(int round, BitSet remaining){
+
+        return null;
     }
 }

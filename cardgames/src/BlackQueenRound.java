@@ -62,4 +62,8 @@ public class BlackQueenRound {
                             + players[2].getName() + ": " + cc.translate(cards[2]) + " "
                             + players[3].getName() + ": " + cc.translate(cards[3]));
     }
+
+    public int getTurn() {
+        return turn;
+    }
 }
