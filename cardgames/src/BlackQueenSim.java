@@ -1,5 +1,10 @@
 import java.util.*;
 
+/**
+ * Bij de eerste slag mogen nog geen strafkaarten worden gespeeld.
+ * Een speler mag geen harten voorspelen voordat een andere speler bij een eerdere slag een harten heeft bijgelegd.
+ * De speler die schoppenvrouw heeft, moet deze kaart bij de eerste de beste gelegenheid waarbij hij de kaart zelf niet krijgt, spelen.
+ */
 public class BlackQueenSim {
 
     public static void main(String[] args) {
@@ -23,7 +28,7 @@ public class BlackQueenSim {
     }
 
     public void bigTest(int numberOfGames){
-        BlackQueenPlayer P1 = new RandomPlayer("P1");
+        BlackQueenPlayer P1 = new SmartPlayerV1("P1");
         BlackQueenPlayer P2 = new RandomPlayer("P2");
         BlackQueenPlayer P3 = new RandomPlayer("P3");
         BlackQueenPlayer P4 = new RandomPlayer("P4");

@@ -1,14 +1,15 @@
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.HashMap;
 
 public class BlackQueenGame {
 
-    private boolean penaltyPlayed;
+    private boolean playedHearts;
     private final ArrayList<BlackQueenRound> rounds = new ArrayList<>();
+    private final BitSet remaining = new BitSet(52);
 
     public BlackQueenGame(){
-        penaltyPlayed = false;
+        playedHearts = false;
+        remaining.set(0,52);
     }
 
     public void newRound() {
@@ -23,19 +24,21 @@ public class BlackQueenGame {
         return rounds.get(rounds.size() - 1).getSymbol();
     }
 
+    public BitSet getRemaining(){return remaining;}
     public ArrayList<BlackQueenRound> getRounds(){
         return rounds;
     }
 
-    public boolean isPenaltyPlayed(){return penaltyPlayed;}
+    public boolean isPlayedHearts(){return playedHearts;}
 
     public boolean isNewRound(){
         return rounds.get(rounds.size() - 1).isNewRound();
     }
 
     public void playTurn(BlackQueenPlayer player, int card){
-        if(!penaltyPlayed && (card == 23 || card >= 39)){
-            penaltyPlayed = true;
+        remaining.clear(card);
+        if(!playedHearts && (card >= 39)){
+            playedHearts = true;
         }
 
         rounds.get(rounds.size() - 1).playTurn(player, card);
