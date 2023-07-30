@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6629e8f0-0ed6-4f8a-85da-2f5911816b13" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/SmartPlayerV3.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cardgames/BlackLadySim.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cardgames/BlackLadySim.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cardgames/SmartPlayerV2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cardgames/SmartPlayerV2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BlackLadySim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BlackLadySim.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SmartPlayerV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SmartPlayerV2.java" afterDir="false" />
     </list>
@@ -92,6 +95,7 @@
       <workItem from="1690717431860" duration="12438000" />
       <workItem from="1690739956848" duration="28000" />
       <workItem from="1690740149847" duration="1844000" />
+      <workItem from="1690747277600" duration="10770000" />
     </task>
     <servers />
   </component>

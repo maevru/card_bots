@@ -1,23 +1,15 @@
 import java.util.*;
 
-/**
- * This player generates random decks of cards the other players might have. Not regarding of what they have played already.
- * Then it simulates for every card it can play a number of random continuations of the game.
- * It plays the card that gives on average the best continuations.
- */
-public class SmartPlayerV2 implements BlackLadyPlayer {
+public class SmartPlayerV3 implements BlackLadyPlayer{
 
     private static final int NUMBER_OF_GAMES = 100;
     private static final int NUMBER_OF_SHUFFLES = 10;
     private final String name;
     private BitSet cards;
     private static final Random RNG = new Random();
-    private final BitSet noHearts = new BitSet(52);
 
-    public SmartPlayerV2(String name){
+    public SmartPlayerV3(String name){
         this.name = name;
-        noHearts.set(0, 52);
-        noHearts.clear(39, 52);
     }
 
     public BitSet getCards() {
@@ -34,7 +26,8 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
 
     public int playCard(BlackLadyGame game) {
         // FIND THE SET OF PLAYABLE CARDS
-        BitSet playableCards = new BitSet();
+        BitSet playableCards = new BitSet(52);
+        BitSet usefulCards = new BitSet(52);
         playableCards.or(cards);
 
         if (game.isNewRound()) {
@@ -42,7 +35,7 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
                 cards.clear(0);
                 return 0;
             } else if (!game.isPlayedHearts()) {
-                playableCards.and(noHearts);
+                playableCards.clear(39, 52);
                 if (playableCards.isEmpty()) {
                     playableCards.or(cards);
                 }
@@ -54,6 +47,100 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
             }
         }
 
+        if(playableCards.cardinality() == 1){
+            cards.clear(playableCards.nextSetBit(0));
+            return playableCards.nextSetBit(0);
+        }
+
+        // FIND THE SET OF USEFUL AND PLAYABLE CARDS
+        BitSet realRemaining = new BitSet();
+        realRemaining.or(game.getRemaining());
+        cards.flip(0,52);
+        realRemaining.and(cards);
+        cards.flip(0,52);
+        usefulCards.or(playableCards);
+        // (Don't play a card when no one will follow)
+        if (game.isNewRound()){
+            BitSet clubs = new BitSet(52);
+            BitSet spades = new BitSet(52);
+            BitSet diamonds = new BitSet(52);
+            BitSet hearts = new BitSet(52);
+            clubs.set(0, 13);
+            spades.set(13, 26);
+            diamonds.set(26, 39);
+            hearts.set(39, 52);
+            clubs.and(realRemaining);
+            spades.and(realRemaining);
+            diamonds.and(realRemaining);
+            hearts.and(realRemaining);
+
+            if(clubs.isEmpty()){
+                usefulCards.clear(0,13);
+            }
+            if(spades.isEmpty()){
+                usefulCards.clear(13,26);
+            }
+            if(diamonds.isEmpty()){
+                usefulCards.clear(26,39);
+            }
+            if(hearts.isEmpty()){
+                usefulCards.clear(39,52);
+            }
+
+            if(usefulCards.isEmpty()){
+                usefulCards.or(playableCards);
+            } else if(usefulCards.cardinality() == 1){
+                cards.clear(usefulCards.nextSetBit(0));
+                return usefulCards.nextSetBit(0);
+            }
+        }
+
+        /*
+        // If all cards between 2 cards have been played there is no need to check them both.
+        for(int card = usefulCards.nextSetBit(0); card != -1; card = usefulCards.nextSetBit(card + 1)){
+            if(card < 13){
+                for(int j = card + 1; j < 13; j++){
+                    if(cards.get(j)){
+                        usefulCards.clear(card);
+                        break;
+                    }
+                    if(realRemaining.get(j)){
+                        break;
+                    }
+                }
+            } else if(card < 26){
+                for(int j = card + 1; j < 26; j++){
+                    if(cards.get(j)){
+                        usefulCards.clear(card);
+                        break;
+                    }
+                    if(realRemaining.get(j)){
+                        break;
+                    }
+                }
+            } else if(card < 39){
+                for(int j = card + 1; j < 39; j++){
+                    if(cards.get(j)){
+                        usefulCards.clear(card);
+                        break;
+                    }
+                    if(realRemaining.get(j)){
+                        break;
+                    }
+                }
+            } else {
+                for(int j = card + 1; j < 52; j++){
+                    if(cards.get(j)){
+                        usefulCards.clear(card);
+                        break;
+                    }
+                    if(realRemaining.get(j)){
+                        break;
+                    }
+                }
+            }
+        }
+         */
 
         HashMap<Integer, Integer> penaltyPoints = new HashMap<>();
         for(int shuffles = 0; shuffles < NUMBER_OF_SHUFFLES; shuffles++){
@@ -61,7 +148,7 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
             ArrayList<BitSet> players = giveCards(game.getRemaining());
 
             // RUN GAMES
-            for(int card = playableCards.nextSetBit(0); card != -1; card = playableCards.nextSetBit(card + 1)){
+            for(int card = usefulCards.nextSetBit(0); card != -1; card = usefulCards.nextSetBit(card + 1)){
 
                 for(int counter = 0; counter < NUMBER_OF_GAMES; counter++){
                     int points = simulateRemainingGame(game, card, cards, players);
@@ -88,19 +175,36 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
         players.add(new BitSet(52));
         players.add(new BitSet(52));
         players.add(new BitSet(52));
-        Stack<Integer> realRemaining = new Stack<>();
-        for(int i = remaining.nextSetBit(0); i != -1; i = remaining.nextSetBit(i + 1)){
-            if(!cards.get(i)){
-                realRemaining.add(i);
-            }
-        }
-        Collections.shuffle(realRemaining);
 
-        int player = 0;
-        while(!realRemaining.isEmpty()){
-            players.get(player).set(realRemaining.pop());
-            player = (player + 1) % 3;
+        BitSet realRemaining = new BitSet(52);
+        realRemaining.or(remaining);
+        cards.flip(0,52);
+        realRemaining.and(cards);
+        cards.flip(0,52);
+        int number = (realRemaining.cardinality() / 3);
+        if(realRemaining.cardinality() % 3 > 0){
+            number++;
         }
+        for(int i = 0; i < number; i++){
+            int card = -1;
+            for(int j = 0; j <= RNG.nextInt(realRemaining.cardinality()); j++){
+                card = realRemaining.nextSetBit(card + 1);
+            }
+            players.get(0).set(card);
+            realRemaining.clear(card);
+        }
+        number = (realRemaining.cardinality() / 2) + (realRemaining.cardinality() % 2);
+        for(int i = 0; i < number; i++){
+            int card = -1;
+            for(int j = 0; j <= RNG.nextInt(realRemaining.cardinality()); j++){
+                card = realRemaining.nextSetBit(card + 1);
+            }
+            players.get(1).set(card);
+            realRemaining.clear(card);
+        }
+
+        players.get(2).or(realRemaining);
+
         return players;
     }
 
@@ -386,3 +490,4 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
         return symbol;
     }
 }
+

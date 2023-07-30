@@ -15,7 +15,7 @@ public class BlackLadySim {
     public static void main(String[] args) {
         BlackLadySim blackLadySim = new BlackLadySim();
         long start = System.currentTimeMillis();
-        blackLadySim.bigTest(1);
+        blackLadySim.bigTest(5000);
         System.out.println("Time: " + (System.currentTimeMillis() - start));
     }
 
@@ -33,10 +33,10 @@ public class BlackLadySim {
     }
 
     public void bigTest(int numberOfGames){
-        BlackLadyPlayer P1 = new SmartPlayerV2("P1");
-        BlackLadyPlayer P2 = new RandomPlayer("P2");
-        BlackLadyPlayer P3 = new RandomPlayer("P3");
-        BlackLadyPlayer P4 = new RandomPlayer("P4");
+        BlackLadyPlayer P1 = new SmartPlayerV3("P0");
+        BlackLadyPlayer P2 = new SmartPlayerV2("P1");
+        BlackLadyPlayer P3 = new RandomPlayer("P2");
+        BlackLadyPlayer P4 = new RandomPlayer("P3");
         HashMap<String, Integer> score = new HashMap<>();
 
 
