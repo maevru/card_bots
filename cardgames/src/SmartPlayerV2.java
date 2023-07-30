@@ -6,6 +6,8 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
 
     }
 
+    private static final int NUMBER_OF_GAMES = 100;
+    private static final int NUMBER_OF_SHUFFLES = 10;
     private final String name;
     private BitSet cards;
     private static final Random RNG = new Random();
@@ -51,37 +53,52 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
             }
         }
 
-        // SHUFFLE CARDS FOR OPPONENTS
+
+        HashMap<Integer, Integer> penaltyPoints = new HashMap<>();
+        for(int shuffles = 0; shuffles < NUMBER_OF_SHUFFLES; shuffles++){
+            // SHUFFLE CARDS FOR OPPONENTS
+            ArrayList<BitSet> players = giveCards(game.getRemaining());
+            // RUN GAMES
+            for(int card = playableCards.nextSetBit(0); card != -1; card = playableCards.nextSetBit(card + 1)){
+
+                for(int counter = 0; counter < NUMBER_OF_GAMES; counter++){
+                    int points = simulateRemainingGame(game, card, cards, players);
+                    penaltyPoints.put(card, penaltyPoints.getOrDefault(card, 0) + points);
+                }
+            }
+        }
+
+        int leastPoints = Integer.MAX_VALUE;
+        int bestCard = -1;
+        for(int card : penaltyPoints.keySet()){
+            if(penaltyPoints.get(card) < leastPoints){
+                leastPoints = penaltyPoints.get(card);
+                bestCard = card;
+            }
+        }
+
+        return bestCard;
+    }
+
+    public ArrayList<BitSet> giveCards(BitSet remaining){
         ArrayList<BitSet> players = new ArrayList<>();
         players.add(new BitSet(52));
         players.add(new BitSet(52));
         players.add(new BitSet(52));
-        Stack<Integer> remaining = new Stack<>();
-        for(int i = game.getRemaining().nextSetBit(0); i != -1; i = game.getRemaining().nextSetBit(i + 1)){
+        Stack<Integer> realRemaining = new Stack<>();
+        for(int i = remaining.nextSetBit(0); i != -1; i = remaining.nextSetBit(i + 1)){
             if(!cards.get(i)){
-                remaining.add(i);
+                realRemaining.add(i);
             }
         }
-        Collections.shuffle(remaining);
+        Collections.shuffle(realRemaining);
 
         int player = 0;
-        while(!remaining.isEmpty()){
-            players.get(player).set(remaining.pop());
+        while(!realRemaining.isEmpty()){
+            players.get(player).set(realRemaining.pop());
             player = (player + 1) % 3;
         }
-
-        // RUN GAMES
-        for(int i = playableCards.nextSetBit(0); i != -1; i = playableCards.nextSetBit(i + 1)){
-            //TODO
-
-        }
-
-        return 0;
-    }
-
-    public ArrayList<BitSet> giveCards(int round, BitSet remaining){
-
-        return null;
+        return players;
     }
 
     public int simulateRemainingGame(BlackLadyGame game, int tryCard, BitSet mainPlayer, ArrayList<BitSet> otherPlayers){
