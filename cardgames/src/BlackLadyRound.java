@@ -1,20 +1,20 @@
 import java.util.BitSet;
 
-public class BlackQueenRound {
+public class BlackLadyRound {
 
-    private final BlackQueenPlayer[] players = new BlackQueenPlayer[4];
+    private final BlackLadyPlayer[] players = new BlackLadyPlayer[4];
     private final int[] cards = new int[4];
     private int turn = 0;
-    private BlackQueenPlayer winner;
+    private BlackLadyPlayer winner;
     private final BitSet symbol = new BitSet(52);
     private int highestCard = -1;
     private int penaltyPoints = 0;
 
-    public BlackQueenRound(){
+    public BlackLadyRound(){
         symbol.set(0, 52);
     }
 
-    public void playTurn(BlackQueenPlayer player, int card){
+    public void playTurn(BlackLadyPlayer player, int card){
         if(turn == 0){
             symbol.clear();
             if(card < 13){
@@ -46,7 +46,7 @@ public class BlackQueenRound {
         turn++;
     }
 
-    public BlackQueenPlayer getWinner(){return winner;}
+    public BlackLadyPlayer getWinner(){return winner;}
 
     public int getPenaltyPoints(){return penaltyPoints;}
 
@@ -54,6 +54,10 @@ public class BlackQueenRound {
 
     public boolean isNewRound(){
         return turn == 0;
+    }
+
+    public int[] getCards(){
+        return cards;
     }
 
     public void printRound(CardConverter cc){

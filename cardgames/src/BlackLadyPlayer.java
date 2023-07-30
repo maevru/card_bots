@@ -1,6 +1,6 @@
 import java.util.BitSet;
 
-public interface BlackQueenPlayer {
+public interface BlackLadyPlayer {
 
     BitSet getCards();
 
@@ -8,6 +8,6 @@ public interface BlackQueenPlayer {
 
     String getName();
 
-    int playCard(BlackQueenGame game);
+    int playCard(BlackLadyGame game);
 
 }

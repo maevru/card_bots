@@ -1,22 +1,23 @@
 import java.util.ArrayList;
 import java.util.BitSet;
 
-public class BlackQueenGame {
+public class BlackLadyGame {
 
     private boolean playedHearts;
-    private final ArrayList<BlackQueenRound> rounds = new ArrayList<>();
+    private final ArrayList<BlackLadyRound> rounds = new ArrayList<>();
     private final BitSet remaining = new BitSet(52);
 
-    public BlackQueenGame(){
+
+    public BlackLadyGame(){
         playedHearts = false;
         remaining.set(0,52);
     }
 
     public void newRound() {
-        rounds.add(new BlackQueenRound());
+        rounds.add(new BlackLadyRound());
     }
 
-    public BlackQueenPlayer getLastWinner(){
+    public BlackLadyPlayer getLastWinner(){
         return rounds.get(rounds.size() - 1).getWinner();
     }
 
@@ -25,8 +26,12 @@ public class BlackQueenGame {
     }
 
     public BitSet getRemaining(){return remaining;}
-    public ArrayList<BlackQueenRound> getRounds(){
+    public ArrayList<BlackLadyRound> getRounds(){
         return rounds;
+    }
+
+    public int[] getCardsFromLastRound(){
+        return rounds.get(rounds.size() - 1).getCards();
     }
 
     public boolean isPlayedHearts(){return playedHearts;}
@@ -39,7 +44,7 @@ public class BlackQueenGame {
         return rounds.get(rounds.size() - 1).getTurn();
     }
 
-    public void playTurn(BlackQueenPlayer player, int card){
+    public void playTurn(BlackLadyPlayer player, int card){
         remaining.clear(card);
         if(!playedHearts && (card >= 39)){
             playedHearts = true;
@@ -50,7 +55,7 @@ public class BlackQueenGame {
 
     public void printGame(){
         CardConverter cc = new CardConverter();
-        for(BlackQueenRound round : rounds){
+        for(BlackLadyRound round : rounds){
             round.printRound(cc);
         }
     }

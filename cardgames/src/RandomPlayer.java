@@ -4,7 +4,7 @@ import java.util.Random;
 /**
  * This player plays random cards following the rules.
  */
-public class RandomPlayer implements BlackQueenPlayer {
+public class RandomPlayer implements BlackLadyPlayer {
 
     private final String name;
     private BitSet cards;
@@ -31,7 +31,7 @@ public class RandomPlayer implements BlackQueenPlayer {
     }
 
 
-    public int playCard(BlackQueenGame game) {
+    public int playCard(BlackLadyGame game) {
         BitSet playableCards = new BitSet();
         playableCards.or(cards);
 

@@ -1,7 +1,10 @@
 import java.util.BitSet;
 import java.util.Random;
 
-public class SmartPlayerV1 implements BlackQueenPlayer{
+/**
+ * This player plays by the strategy of hunting the Black Queen and playing low hearts when possible.
+ */
+public class SmartPlayerV1 implements BlackLadyPlayer {
 
     private final String name;
     private BitSet cards;
@@ -27,7 +30,7 @@ public class SmartPlayerV1 implements BlackQueenPlayer{
         return name;
     }
 
-    public int playCard(BlackQueenGame game) {
+    public int playCard(BlackLadyGame game) {
         BitSet remaining = new BitSet(52);
         remaining.or(cards);
         remaining.flip(0,52);
