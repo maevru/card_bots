@@ -11,13 +11,14 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
     private static final int NUMBER_OF_SHUFFLES = 10;
     private final String name;
     private BitSet cards;
-    private static final Random RNG = new Random();
+    private static Random RNG = new Random();
     private final BitSet noHearts = new BitSet(52);
 
-    public SmartPlayerV2(String name){
+    public SmartPlayerV2(String name, int seed){
         this.name = name;
         noHearts.set(0, 52);
         noHearts.clear(39, 52);
+        RNG = new Random(seed);
     }
 
     public BitSet getCards() {
@@ -58,7 +59,7 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
         HashMap<Integer, Integer> penaltyPoints = new HashMap<>();
         for(int shuffles = 0; shuffles < NUMBER_OF_SHUFFLES; shuffles++){
             // SHUFFLE CARDS FOR OPPONENTS
-            ArrayList<BitSet> players = giveCards(game.getRemaining());
+            ArrayList<BitSet> players = giveCards(game.getRemainingCards());
 
             // RUN GAMES
             for(int card = playableCards.nextSetBit(0); card != -1; card = playableCards.nextSetBit(card + 1)){
@@ -94,7 +95,7 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
                 realRemaining.add(i);
             }
         }
-        Collections.shuffle(realRemaining);
+        Collections.shuffle(realRemaining, RNG);
 
         int player = 0;
         while(!realRemaining.isEmpty()){
@@ -125,7 +126,7 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
 
 
         // FINISH LAST ROUND
-        int[] lastRound = game.getCardsFromLastRound();
+        ArrayList<Integer> lastRound = game.getCardsFromLastRound();
         ArrayList<Integer> thisRound = new ArrayList<>();
         BitSet symbol = new BitSet(52);
         int card;
@@ -159,7 +160,7 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
             case 1 -> {
                 // PLAYER 3
                 // Select card
-                card = lastRound[0];
+                card = lastRound.get(0);
                 // Update remaining information
                 symbol.or(getSymbolFromCard(card));
                 winner = 3;
@@ -193,7 +194,7 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
             case 2 -> {
                 // PLAYER 2
                 // Select card
-                card = lastRound[0];
+                card = lastRound.get(0);
                 // Update remaining information
                 symbol.or(getSymbolFromCard(card));
                 winner = 2;
@@ -202,7 +203,7 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
 
                 // PLAYER 3
                 // Select card
-                card = lastRound[1];
+                card = lastRound.get(1);
                 // Update remaining information
                 if (symbol.get(card) && card > highestCard) {
                     winner = 3;
@@ -235,7 +236,7 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
             case 3 -> {
                 // PLAYER 1
                 // Select card
-                card = lastRound[0];
+                card = lastRound.get(0);
                 // Update remaining information
                 symbol.or(getSymbolFromCard(card));
                 winner = 1;
@@ -244,7 +245,7 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
 
                 // PLAYER 2
                 // Select card
-                card = lastRound[1];
+                card = lastRound.get(1);
                 // Update remaining information
                 if (symbol.get(card) && card > highestCard) {
                     winner = 2;
@@ -254,7 +255,7 @@ public class SmartPlayerV2 implements BlackLadyPlayer {
 
                 // PLAYER 3
                 // Select card
-                card = lastRound[2];
+                card = lastRound.get(2);
                 // Update remaining information
                 if (symbol.get(card) && card > highestCard) {
                     winner = 3;

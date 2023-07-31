@@ -34,7 +34,7 @@ public class SmartPlayerV1 implements BlackLadyPlayer {
         BitSet remaining = new BitSet(52);
         remaining.or(cards);
         remaining.flip(0,52);
-        remaining.and(game.getRemaining());
+        remaining.and(game.getRemainingCards());
 
         BitSet playableCards = new BitSet();
         playableCards.or(cards);

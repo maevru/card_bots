@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.BitSet;
 
 public class BlackLadyRound {
 
-    private final BlackLadyPlayer[] players = new BlackLadyPlayer[4];
-    private final int[] cards = new int[4];
+    private final ArrayList<String> players = new ArrayList<>();
+    private final ArrayList<Integer> cards = new ArrayList<>();
     private int turn = 0;
     private BlackLadyPlayer winner;
     private final BitSet symbol = new BitSet(52);
@@ -41,10 +42,14 @@ public class BlackLadyRound {
             penaltyPoints += 1;
         }
 
-        players[turn] = player;
-        cards[turn] = card;
+        players.add(player.getName());
+        cards.add(card);
         turn++;
     }
+
+    public ArrayList<String> getPlayers(){return players;}
+
+    public ArrayList<Integer> getCards(){return cards;}
 
     public BlackLadyPlayer getWinner(){return winner;}
 
@@ -56,15 +61,11 @@ public class BlackLadyRound {
         return turn == 0;
     }
 
-    public int[] getCards(){
-        return cards;
-    }
-
     public void printRound(CardConverter cc){
-        System.out.println(players[0].getName() + ": " + cc.translate(cards[0]) + " "
-                            + players[1].getName() + ": " + cc.translate(cards[1]) + " "
-                            + players[2].getName() + ": " + cc.translate(cards[2]) + " "
-                            + players[3].getName() + ": " + cc.translate(cards[3]));
+        System.out.println(players.get(0) + ": " + cc.translate(cards.get(0)) + " "
+                            + players.get(1) + ": " + cc.translate(cards.get(1)) + " "
+                            + players.get(2) + ": " + cc.translate(cards.get(2)) + " "
+                            + players.get(3) + ": " + cc.translate(cards.get(3)));
     }
 
     public int getTurn() {

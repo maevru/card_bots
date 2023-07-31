@@ -12,10 +12,12 @@ import java.util.*;
  */
 public class BlackLadySim {
 
+    private final Random RNG = new Random();
+
     public static void main(String[] args) {
         BlackLadySim blackLadySim = new BlackLadySim();
         long start = System.currentTimeMillis();
-        blackLadySim.bigTest(5000);
+        blackLadySim.bigTest(10000);
         System.out.println("Time: " + (System.currentTimeMillis() - start));
     }
 
@@ -33,10 +35,11 @@ public class BlackLadySim {
     }
 
     public void bigTest(int numberOfGames){
-        BlackLadyPlayer P1 = new SmartPlayerV3("P0");
-        BlackLadyPlayer P2 = new SmartPlayerV2("P1");
-        BlackLadyPlayer P3 = new RandomPlayer("P2");
-        BlackLadyPlayer P4 = new RandomPlayer("P3");
+
+        BlackLadyPlayer P1 = new SmartPlayerV3("P0", 0);
+        BlackLadyPlayer P2 = new RandomPlayer("P1", 1);
+        BlackLadyPlayer P3 = new SmartPlayerV2("P2", 2);
+        BlackLadyPlayer P4 = new RandomPlayer("P3", 3);
         HashMap<String, Integer> score = new HashMap<>();
 
 
@@ -65,7 +68,7 @@ public class BlackLadySim {
         players.add(P4);
 
         ArrayList<Integer> shuffledCards = new ArrayList<>(cards);
-        Collections.shuffle(shuffledCards);
+        Collections.shuffle(shuffledCards, RNG);
 
         int counter = -1;
         for(int i = 0; i < 4; i++){
@@ -98,7 +101,7 @@ public class BlackLadySim {
             }
         }
 
-        BlackLadyGame game = new BlackLadyGame();
+        BlackLadyGame game = new BlackLadyGame(players);
         BlackLadyPlayer nextPlayer = startPlayer;
         for(int i = 0; i < 13; i++){
             game.newRound();

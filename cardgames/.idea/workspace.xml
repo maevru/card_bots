@@ -5,12 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6629e8f0-0ed6-4f8a-85da-2f5911816b13" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/SmartPlayerV3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cardgames/BlackLadyGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cardgames/BlackLadyGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cardgames/BlackLadyRound.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cardgames/BlackLadyRound.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/cardgames/BlackLadySim.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cardgames/BlackLadySim.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cardgames/RandomPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cardgames/RandomPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cardgames/SmartPlayerV1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cardgames/SmartPlayerV1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/cardgames/SmartPlayerV2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cardgames/SmartPlayerV2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cardgames/SmartPlayerV3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cardgames/SmartPlayerV3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BlackLadyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BlackLadyGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BlackLadyRound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BlackLadyRound.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BlackLadySim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BlackLadySim.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RandomPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RandomPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SmartPlayerV1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SmartPlayerV1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SmartPlayerV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SmartPlayerV2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SmartPlayerV3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SmartPlayerV3.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +71,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="cardgames" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SmartPlayerV2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SmartPlayerV2" />
       <module name="cardgames" />
@@ -71,6 +88,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.BlackLadySim" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.SmartPlayerV2" />
       </list>
     </recent_temporary>
@@ -96,6 +114,8 @@
       <workItem from="1690739956848" duration="28000" />
       <workItem from="1690740149847" duration="1844000" />
       <workItem from="1690747277600" duration="10770000" />
+      <workItem from="1690795694223" duration="15381000" />
+      <workItem from="1690812272670" duration="18234000" />
     </task>
     <servers />
   </component>

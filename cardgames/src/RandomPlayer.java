@@ -8,14 +8,15 @@ public class RandomPlayer implements BlackLadyPlayer {
 
     private final String name;
     private BitSet cards;
-    private static final Random RNG = new Random();
+    private static Random RNG = new Random();
     private final BitSet noPenaltyCards = new BitSet(52);
 
-    public RandomPlayer(String name) {
+    public RandomPlayer(String name, int seed) {
         this.name = name;
         noPenaltyCards.set(0, 52);
         noPenaltyCards.clear(23);
         noPenaltyCards.clear(39, 52);
+        RNG = new Random(seed);
     }
 
     public BitSet getCards() {
