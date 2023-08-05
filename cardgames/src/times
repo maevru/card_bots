@@ -84,3 +84,8 @@ Corrected next player
 7 rounds: 382ms - 1454616 nodes
 8 rounds: 11527ms - 74449540 nodes
 9 rounds: indefinite
+
+Fixed scores and find optimal game
+
+
+Gooi harten weg en vervolgens hoogste en fix usefulCards beter

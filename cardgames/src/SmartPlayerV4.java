@@ -43,9 +43,8 @@ public class SmartPlayerV4 {
                     startPlayer = players.indexOf(player);
                 }
             }
-
-
-            playerV4.simulate(players, 0, startPlayer, new BitSet(), -1, -1, false, remaining);
+            int[] penaltyPoints = new int[4];
+            int[] optimalGame = playerV4.simulate(players, 0, startPlayer, new BitSet(), -1, -1, false, remaining, 0, penaltyPoints);
             long time = System.currentTimeMillis() - start;
             System.out.println("All games simulated in " + time + " ms.");
             System.out.println("Nodes: " + playerV4.NODES);
@@ -75,7 +74,8 @@ public class SmartPlayerV4 {
         return players;
     }
 
-    public boolean simulate(ArrayList<BitSet> players, int turn, int nextPlayer, BitSet symbol, int highestCard, int winner, boolean heartsPlayed, BitSet remaining){
+    public int[] simulate(ArrayList<BitSet> players, int turn, int nextPlayer, BitSet symbol, int highestCard, int winner,
+                          boolean heartsPlayed, BitSet remaining, int penaltyPoints, int[] score){
         NODES++;
 
         BitSet cards = new BitSet();
@@ -86,8 +86,7 @@ public class SmartPlayerV4 {
             if(cards.get(0)){
                 players.get(nextPlayer).clear(0);
                 remaining.clear(0);
-                simulate(players, turn + 1, (nextPlayer + 1) % 4, getSymbolFromCard(0), 0, nextPlayer, false, remaining);
-                return true;
+                return simulate(players, turn + 1, (nextPlayer + 1) % 4, getSymbolFromCard(0), 0, nextPlayer, false, remaining, 0, score);
             }
 
             // If no remaining hearts left stop computing
@@ -95,7 +94,7 @@ public class SmartPlayerV4 {
             remainingHearts.or(remaining);
             remainingHearts.and(HEARTS);
             if(remainingHearts.isEmpty()){
-                return false;
+                return score;
             }
 
             if(heartsPlayed){
@@ -103,7 +102,12 @@ public class SmartPlayerV4 {
                 for(int i = usefulCards.nextSetBit(0); i != -1; i = usefulCards.nextSetBit(i + 1)){
                     players.get(nextPlayer).clear(i);
                     remaining.clear(i);
-                    simulate(players, turn + 1, (nextPlayer + 1) % 4, getSymbolFromCard(i), i, nextPlayer, true, remaining);
+                    if(HEARTS.get(i)){
+                        simulate(players, turn + 1, (nextPlayer + 1) % 4, getSymbolFromCard(i), i, nextPlayer, true, remaining, penaltyPoints + 1, score);
+                    } else {
+                        simulate(players, turn + 1, (nextPlayer + 1) % 4, getSymbolFromCard(i), i, nextPlayer, true, remaining, penaltyPoints, score);
+                    }
+
                     players.get(nextPlayer).set(i);
                     remaining.set(i);
                 }
@@ -118,7 +122,11 @@ public class SmartPlayerV4 {
                 for(int i = usefulCards.nextSetBit(0); i != -1; i = usefulCards.nextSetBit(i + 1)){
                     players.get(nextPlayer).clear(i);
                     remaining.clear(i);
-                    simulate(players, turn + 1, (nextPlayer + 1) % 4, getSymbolFromCard(i), i, nextPlayer, false, remaining);
+                    if(HEARTS.get(i)){
+                        simulate(players, turn + 1, (nextPlayer + 1) % 4, getSymbolFromCard(i), i, nextPlayer, false, remaining, penaltyPoints + 1, score);
+                    } else {
+                        simulate(players, turn + 1, (nextPlayer + 1) % 4, getSymbolFromCard(i), i, nextPlayer, false, remaining, penaltyPoints, score);
+                    }
                     players.get(nextPlayer).set(i);
                     remaining.set(i);
                 }
@@ -137,15 +145,33 @@ public class SmartPlayerV4 {
                 remaining.clear(i);
                 if(symbol.get(i) & i > highestCard){
                     if(turn % 4 == 3){
-                        simulate(players, turn + 1, nextPlayer, symbol, i, nextPlayer, HEARTS.get(i), remaining);
+                        if(HEARTS.get(i)){
+                            score[nextPlayer] += penaltyPoints + 1;
+                        } else {
+                            score[nextPlayer] += penaltyPoints;
+                        }
+                        simulate(players, turn + 1, nextPlayer, symbol, i, nextPlayer, HEARTS.get(i), remaining, 0, score);
                     } else {
-                        simulate(players, turn + 1, (nextPlayer + 1) % 4, symbol, i, nextPlayer, HEARTS.get(i), remaining);
+                        if(HEARTS.get(i)){
+                            simulate(players, turn + 1, (nextPlayer + 1) % 4, symbol, i, nextPlayer, HEARTS.get(i), remaining, penaltyPoints + 1, score);
+                        } else {
+                            simulate(players, turn + 1, (nextPlayer + 1) % 4, symbol, i, nextPlayer, HEARTS.get(i), remaining, penaltyPoints, score);
+                        }
                     }
                 } else {
                     if(turn % 4 == 3){
-                        simulate(players, turn + 1, winner, symbol, highestCard, winner, HEARTS.get(i), remaining);
+                        if(HEARTS.get(i)){
+                            score[winner] += penaltyPoints + 1;
+                        } else {
+                            score[winner] += penaltyPoints;
+                        }
+                        simulate(players, turn + 1, winner, symbol, highestCard, winner, HEARTS.get(i), remaining, 0, score);
                     } else {
-                        simulate(players, turn + 1, (nextPlayer + 1) % 4, symbol, highestCard, winner, HEARTS.get(i), remaining);
+                        if(HEARTS.get(i)){
+                            simulate(players, turn + 1, (nextPlayer + 1) % 4, symbol, highestCard, winner, HEARTS.get(i), remaining, penaltyPoints + 1, score);
+                        } else {
+                            simulate(players, turn + 1, (nextPlayer + 1) % 4, symbol, highestCard, winner, HEARTS.get(i), remaining, penaltyPoints, score);
+                        }
                     }
                 }
                 players.get(nextPlayer).set(i);
@@ -153,7 +179,7 @@ public class SmartPlayerV4 {
             }
         }
 
-        return true;
+        return score;
     }
 
     public BitSet getSymbolFromCard(int card){
