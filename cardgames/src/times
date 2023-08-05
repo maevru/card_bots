@@ -1,0 +1,86 @@
+All possible games
+1 round: 0ms
+2 rounds: 1ms
+3 rounds: 6ms
+4 rounds: 79ms
+5 rounds: 30572ms
+6 rounds: indefinite
+
+Must follow symbol (seed: 69)
+1 round: 0ms - 5 nodes
+2 rounds: 1ms - 52 nodes
+3 rounds: 4ms - 1369 nodes
+4 rounds: 9ms - 33910 nodes
+5 rounds: 1563ms - 25976215 nodes
+6 rounds: 6940ms - 131473905 nodes
+7 rounds: indefinite
+
+Update getSymbolFromCard function (seed: 69)
+1 round: 0ms - 5 nodes
+2 rounds: 0ms - 52 nodes
+3 rounds: 3ms - 1369 nodes
+4 rounds: 8ms - 33910 nodes
+5 rounds: 1416ms - 25976215 nodes
+6 rounds: 6495ms - 131473905 nodes
+7 rounds: indefinite
+
+Can't play hearts until broken
+1 round: 1ms - 5 nodes
+2 rounds: 0ms - 25 nodes
+3 rounds: 3ms - 1029 nodes
+4 rounds: 182ms - 33910 nodes
+5 rounds: 254ms - 3209143 nodes
+6 rounds: 2735ms - 56453597 nodes
+7 rounds: indefinite
+
+Stop when no hearts left
+1 round: 1ms - 5 nodes
+2 rounds: 0ms - 25 nodes
+3 rounds: 3ms - 933 nodes
+4 rounds: 11ms - 33014 nodes
+5 rounds: 239ms - 1970167 nodes
+6 rounds: 2961ms - 50939149 nodes
+7 rounds: 574630ms - -2001519873 nodes
+8 rounds: indefinite
+
+Only play useful cards (cards someone can follow), if no useful only try one card
+1 round: 1ms - 5 nodes
+2 rounds: 0ms - 25 nodes
+3 rounds: 4ms - 651 nodes
+4 rounds: 8ms - 10838 nodes
+5 rounds: 233ms - 1530271 nodes
+6 rounds: 465ms - 4400389 nodes
+7 rounds: 574630ms - -2001519873 nodes
+8 rounds: indefinite
+
+Player 1 starts with card 0
+1 round: 0ms - 5 nodes
+2 rounds: 0ms - 22 nodes
+3 rounds: 0ms - 54 nodes
+4 rounds: 3ms - 378 nodes
+5 rounds: 434ms - 2503771 nodes
+6 rounds: 5ms - 15279 nodes
+7 rounds: 69253ms - 748112980 nodes
+8 rounds: indefinite
+
+If all cards between 2 cards are played, the 2 cards are the same and only one should be checked
+1 round: 0ms - 5 nodes
+2 rounds: 0ms - 22 nodes
+3 rounds: 0ms - 33 nodes
+4 rounds: 0ms - 64 nodes
+5 rounds: 35ms - 63006 nodes
+6 rounds: 0ms - 1091 nodes
+7 rounds: 692ms - 4014020 nodes
+8 rounds: 19832ms - 166321457 nodes
+9 rounds: indefinite
+
+Corrected next player
+1 round: 0ms - 5 nodes
+2 rounds: 0ms - 21 nodes
+3 rounds: 3ms - 294 nodes
+4 rounds: 5ms - 1284 nodes
+5 rounds: 7ms - 9241 nodes
+6 rounds: 10ms - 21956 nodes
+7 rounds: 382ms - 1454616 nodes
+8 rounds: 11527ms - 74449540 nodes
+9 rounds: indefinite
