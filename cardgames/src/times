@@ -86,6 +86,85 @@ Corrected next player
 9 rounds: indefinite
 
 Fixed scores and find optimal game
+1 round: 0ms - 5 nodes - 0 1 0 0
+2 rounds: 0ms - 21 nodes - 0 0 2 0
+3 rounds: 4ms - 294 nodes - 0 3 0 0
+4 rounds: 4ms - 1284 nodes - 0 2 0 2
+5 rounds: 10ms - 9241 nodes - 0 0 0 5
+6 rounds: 13ms - 21956 nodes - 0 0 6 0
+7 rounds: 422ms - 1454616 nodes - 5 1 1 0
+8 rounds: 12880ms - 74449540 nodes - 0 0 8 0
+9 rounds: indefinite
 
+restructured program
+1 round: 0ms - 5 nodes - 0 1 0 0
+2 rounds: 0ms - 21 nodes - 0 0 2 0
+3 rounds: 4ms - 294 nodes - 0 3 0 0
+4 rounds: 4ms - 1284 nodes - 0 2 0 2
+5 rounds: 16ms - 9241 nodes - 0 0 0 5
+6 rounds: 20ms - 21956 nodes - 0 0 6 0
+7 rounds: 432ms - 1454616 nodes - 5 1 1 0
+8 rounds: 16487ms - 74449540 nodes - 0 0 8 0
+9 rounds: indefinite
 
-Gooi harten weg en vervolgens hoogste en fix usefulCards beter
+If card results in 0 points return
+1 round: 14ms - 5 nodes - 0 1 0 0
+2 rounds: 0ms - 9 nodes - 0 0 2 0
+3 rounds: 6ms - 13 nodes - 0 3 0 0
+4 rounds: 0ms - 212 nodes - 0 2 0 2
+5 rounds: 5ms - 1220 nodes - 0 0 0 5
+6 rounds: 5ms - 25 nodes - 0 0 6 0
+7 rounds: 63ms - 81290 nodes - 5 1 1 0
+8 rounds: 14ms - 20092 nodes - 0 0 8 0
+9 rounds: 48446ms - 220476346 nodes - 2 0 6 1
+10 rounds: 14020ms - 63985625 nodes - 0 5 5 0
+11 rounds: 121196ms - 547284261 nodes - 4 0 3 4
+12 rounds: 24900ms - 110965342 nodes - 0 2 10 0
+13 rounds: indefinite
+
+Only throw away the highest of a symbol
+1 round: 14ms - 5 nodes - 0 1 0 0
+2 rounds: 0ms - 9 nodes - 0 0 2 0
+3 rounds: 6ms - 13 nodes - 0 3 0 0
+4 rounds: 10ms - 132 nodes - 0 2 0 2
+5 rounds: 2ms - 337 nodes - 0 0 0 5
+6 rounds: 5ms - 25 nodes - 0 0 6 0
+7 rounds: 47ms - 40377 nodes - 5 1 1 0
+8 rounds: 0ms - 1649 nodes - 0 0 8 0
+9 rounds: 4337ms - 20276704 nodes - 2 0 6 1
+10 rounds: 1012ms - 4921506 nodes - 4 0 6 0
+11 rounds: 22762ms - 109814277 nodes - 4 0 3 4
+12 rounds: 1325ms - 6389956 nodes - 0 2 10 0
+13 rounds: indefinite
+
+Play highest club first round
+1 round: 14ms - 5 nodes - 0 1 0 0
+2 rounds: 0ms - 9 nodes - 0 0 2 0
+3 rounds: 6ms - 13 nodes - 0 3 0 0
+4 rounds: 10ms - 132 nodes - 0 2 0 2
+5 rounds: 2ms - 337 nodes - 0 0 0 5
+6 rounds: 5ms - 25 nodes - 0 0 6 0
+7 rounds: 26ms - 10785 nodes - 4 2 1 0
+8 rounds: 5ms - 4446 nodes - 0 0 8 0
+9 rounds: 821ms - 2815422 nodes - 1 0 0 8
+10 rounds: 152ms - 680475 nodes - 4 0 6 0
+11 rounds: 12127ms - 56269638 nodes - 4 0 3 4
+12 rounds: 209ms - 900998 nodes - 0 2 10 0
+13 rounds: 298435ms - 1389855632 nodes - 0 13 0 0
+
+Highest card under highest only
+1 round: 14ms - 5 nodes - 0 1 0 0
+2 rounds: 0ms - 9 nodes - 0 0 2 0
+3 rounds: 6ms - 13 nodes - 0 3 0 0
+4 rounds: 10ms - 132 nodes - 0 2 0 2
+5 rounds: 2ms - 337 nodes - 0 0 0 5
+6 rounds: 5ms - 25 nodes - 0 0 6 0
+7 rounds: 14ms - 7733 nodes - 4 2 1 0
+8 rounds: 6ms - 2715 nodes - 0 0 8 0
+9 rounds: 480ms - 1417977 nodes - 1 0 0 8
+10 rounds: 10ms - 46857 nodes - 4 0 6 0
+11 rounds: 826ms - 3391704 nodes - 5 0 0 6
+12 rounds: 20ms - 84882 nodes - 0 2 10 0
+13 rounds: 17807ms - 84329791 nodes - 0 13 0 0
+
+Add black lady to game

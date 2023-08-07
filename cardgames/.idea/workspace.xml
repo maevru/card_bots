@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6629e8f0-0ed6-4f8a-85da-2f5911816b13" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/SmartPlayerV4Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cardgames/SmartPlayerV4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cardgames/SmartPlayerV4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cardgames/times" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cardgames/times" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SmartPlayerV4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SmartPlayerV4.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/times" beforeDir="false" afterPath="$PROJECT_DIR$/src/times" afterDir="false" />
     </list>
@@ -113,6 +117,8 @@
       <workItem from="1690812272670" duration="18234000" />
       <workItem from="1691232863537" duration="10911000" />
       <workItem from="1691252286909" duration="1890000" />
+      <workItem from="1691408217085" duration="893000" />
+      <workItem from="1691409134846" duration="14498000" />
     </task>
     <servers />
   </component>
